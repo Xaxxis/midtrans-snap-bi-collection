@@ -1628,8 +1628,11 @@
 											"listen": "test",
 											"script": {
 												"id": "db5e0356-c4ed-4b1a-8f8e-63f1d1b62159",
-												"exec": [],
-												"type": "text/javascript"
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
@@ -1646,8 +1649,7 @@
 											},
 											{
 												"key": "Authorization",
-												"value": "dummy",
-												"type": "text"
+												"value": "dummy"
 											},
 											{
 												"key": "X-TIMESTAMP",
@@ -1663,7 +1665,7 @@
 											},
 											{
 												"key": "X-EXTERNAL-ID",
-												"value": "{{$randomUUID}}"
+												"value": "c643b8eb-add5-4d9f-ac2e-ab878e839d87"
 											},
 											{
 												"key": "X-DEVICE-ID",
@@ -1675,7 +1677,8 @@
 											},
 											{
 												"key": "debug-id",
-												"value": "{{$randomUUID}}-debug-yusup"
+												"value": "{{$randomUUID}}-debug-yusup",
+												"disabled": true
 											}
 										],
 										"body": {
