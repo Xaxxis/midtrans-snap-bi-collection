@@ -5327,7 +5327,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "4b22d8a3-6409-4265-84be-44869b4ad28a",
+				"id": "444bb273-b11f-457e-89ea-c10dc2a49a93",
 				"type": "text/javascript",
 				"exec": [
 					"if (pm.request.url.toString() == 'https://joolfe.github.io/postman-util-lib/dist/bundle.js') {",
@@ -5337,6 +5337,8 @@
 					"if (pm.info.requestName.toLocaleLowerCase().includes(\"legacy\") || pm.info.requestName === \"Sample Request Access Token B2B\") {",
 					"    return;",
 					"}",
+					"",
+					"const IRIS_REQUEST = pm.request.n",
 					"",
 					"eval(pm.collectionVariables.get('pmlib_code'))",
 					"const moment = require(\"moment\")",
@@ -5424,7 +5426,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "179c7676-9a53-4cb2-a729-25a2c8618c24",
+				"id": "89d20a71-be49-48be-b62f-57adc08bc1cb",
 				"type": "text/javascript",
 				"exec": [
 					""
