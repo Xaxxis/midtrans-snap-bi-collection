@@ -4558,7 +4558,7 @@
 							},
 							{
 								"key": "X-PARTNER-ID",
-								"value": "95759243774227800961656654135296"
+								"value": "{{MidtransMerchantId}}"
 							},
 							{
 								"key": "X-EXTERNAL-ID",
