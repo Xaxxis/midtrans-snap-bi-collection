@@ -914,6 +914,191 @@
 							"id": "2c283e2a-2a59-4f3b-ba8e-8bad015896e5"
 						},
 						{
+							"name": "Dana Create Payment",
+							"item": [
+								{
+									"name": "Dana Guest Direct Debit Payment",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "130ac711-fe65-4796-8efc-8c1022150edf",
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "83bd3be9-0be5-4254-ae98-899f80ee763b",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);",
+													"pm.collectionVariables.set(\"GopayReferenceNo\", jsonData.referenceNo);",
+													"pm.collectionVariables.set(\"GopayPartnerReferenceNo\", jsonData.partnerReferenceNo);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "ae5ba641-b430-4d0d-a439-b211eb7a3abb",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "dummy"
+											},
+											{
+												"key": "X-TIMESTAMP",
+												"value": "dummy"
+											},
+											{
+												"key": "X-SIGNATURE",
+												"value": "dummy"
+											},
+											{
+												"key": "X-PARTNER-ID",
+												"value": "82150823919040624621823174737537"
+											},
+											{
+												"key": "X-EXTERNAL-ID",
+												"value": "{{$randomUUID}}"
+											},
+											{
+												"key": "X-DEVICE-ID",
+												"value": "09864ADCASA",
+												"disabled": true
+											},
+											{
+												"key": "CHANNEL-ID",
+												"value": "95221"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"partnerReferenceNo\": \"GOPAY-OPEN-API-TEST-11111\",\n  \"merchantId\": \"{{MidtransMerchantId}}\",\n  \"chargeToken\": \"\",\n  \"urlParam\": {\n    \"url\": \"https://test.bi.go.id/v1/test\",\n    \"type\": \"PAY_RETURN\",\n    \"isDeeplink\": \"N\"\n  },\n  \"validUpTo\": \"2024-07-27T16:59:11+07:00\",\n  \"payOptionDetails\": [\n    {\n      \"payMethod\": \"GOPAY\",\n      \"payOption\": \"GOPAY_WALLET\",\n      \"transAmount\": {\n        \"value\": \"15000.00\",\n        \"currency\": \"IDR\"\n      }\n    }\n  ],\n  \"additionalInfo\": {\n    \"items\": [\n      {\n            \"id\": \"24525635625623\",\n            \"quantity\": \"1\",\n            \"price\": {\n                \"value\": \"15000.00\",\n                \"currency\": \"IDR\"\n            }\n        }\n    ]\n  }\n}\n\n"
+										},
+										"url": "https://merchants.stg.midtrans.com/v1.0/debit/payment-host-to-host",
+										"description": "API for creating deeplink payment that complies with SNAP Open API Specs.\n\nContract: [Deeplink Direct Debit Open API Contract](https://docs.google.com/document/d/1-4VknkHyeMh890odtudPM5yLoXQqvvjOBrkuLGGNysg/edit)\n\nBI Specs: [Direct Debit Specs](https://apidevportal.aspi-indonesia.or.id/api-services/transfer-debit/direct-debit)\n\n### **Request Header**\n\n| Header Name | Field Type | Mandatory (M/O) | Field Description |\n| --- | --- | --- | --- |\n| Content-type | String | M | Media type of the resource, i.e. application/json |\n| X-TIMESTAMP | String | M | Client’s current local time in ISO-8601 format |\n| X-SIGNATURE | String | M | Created using symmetric signature HMAC_SHA512 algorithm |\n| Authorization | String | M | Represents access_token of a request; string starts with keyword “Bearer ” followed by access_token. Can get this token from b2b response. |\n| X-PARTNER-ID | String | M | Unique identifier for caller (client_id) |\n| X-EXTERNAL-ID | String | M | Alphanumeric string. Preferably UUID. Reference number that should be unique in the same day or 1 day idempotency key |\n| CHANNEL-ID | String | M | Channel id Device identification on which the API services are currently being accessed by the end user. Given by BI |\n\n### **Request Body**\n\n| Field Name | Field Type | Mandatory (M/O) | Field Description |\n| --- | --- | --- | --- |\n| partnerReferenceNo | String(64) | M | Merchant order id. Only used for debugging purpose in server side |\n| chargeToken | String(40) | M | Authorization token. Same as the Authorization header. |\n| merchantId | String(64) | O | Merchant identifier that is unique per each merchant |\n| validUpTo | String(25) | O | The time when the payment will be automatically expired. The format is defined by ISO 8601. (Maximum value: 180 days from trx time, Minimum value: 20 second, default value: 15 min) |\n| urlParam | Array of Object | O | Merchant redirect URL. After completing payment, user will be redirected back to this URL |\n| urlParam.url | String(512) | M | URL value |\n| urlParam.type | String(32) | M | URL type. Possible value: PAY_RETURN |\n| urlParam.isDeeplink | String(1) | M | Whether the URL is a deeplink URL or not. Possible Value: Y, N |\n| payOptionDetails | Array of Object | M | Payment option that will be used for this payment. Currently only accept 1 payOptions |\n| payOptionDetails.payMethod | String(64) | M | Payment method for the transaction. Possible value: GOPAY |\n| payOptionDetails.payOption | String(64) | M | Payment option which shows the provider of this payment. Reserved for future use case. |\n| payOptionDetails.transAmount | Object | M | Payment Transaction Amount |\n| payOptionDetails.transAmount.value | String(ISO 8601) | M | Transaction amount that will be paid using this payment method. If it's IDR then value includes 2 decimal digits. e.g. IDR 10.000 will be placed as 10000.00. Minimum value: 1.00, Maximum value: 99999999999.00 |\n| payOptionDetails.transAmount.currency | String(3) | M | Transaction currency that will be paid using this payment method. Possible Value: IDR |\n| additionalInfo | Object | O | Additional information field which merchants need to pass to support current API contracts. |\n| additionalInfo.customerDetails | Object | O | Customer Detail Information |\n| additionalInfo.customerDetails.phone | String(15) | O | Customer Phone number |\n| additionalInfo.customerDetails.email | String(255) | O | Customer email |\n| additionalInfo.customerDetails.firstName | String(255) | O | Customer First Name |\n| additionalInfo.customerDetails.lastName | String(255) | O | Customer Last Name |\n| additionalInfo.customerDetails.billingAddress | Object | O | Customer billing address |\n| additionalInfo.customerDetails.billingAddress.firstName | String(255) | O | Billing address first name |\n| additionalInfo.customerDetails.billingAddress.lastName | String(255) | O | Billing address last name |\n| additionalInfo.customerDetails.billingAddress.phone | String(15) | O | Billing address phone |\n| additionalInfo.customerDetails.billingAddress.address | String(255) | O | Billing address detail |\n| additionalInfo.customerDetails.billingAddress.city | String(255) | O | Billing address city |\n| additionalInfo.customerDetails.billingAddress.postalCode | String(255) | O | Billing address postal code |\n| additionalInfo.customerDetails.billingAddress.countryCode | String(15) | O | Billing address country code |\n| additionalInfo.customerDetails.shippingAddress | Object | O | Customer shipping address |\n| additionalInfo.customerDetails.shippingAddress.firstName | String(255) | O | Shipping address first name |\n| additionalInfo.customerDetails.shippingAddress.lastName | String(255) | O | Shipping address last name |\n| additionalInfo.customerDetails.shippingAddress.phone | String(15) | O | Shipping address phone |\n| additionalInfo.customerDetails.shippingAddress.address | String(255) | O | Shipping address detail |\n| additionalInfo.customerDetails.shippingAddress.city | String(255) | O | Shipping address city |\n| additionalInfo.customerDetails.shippingAddress.postalCode | String(255) | O | Shipping address postal code |\n| additionalInfo.customerDetails.shippingAddress.countryCode | String(15) | O | Shipping address country code |\n| additionalInfo.items | Array Of Object | O | Item Details |\n| additionalInfo.items.id | String(32) | O | Item ID |\n| additionalInfo.items.price | Object | M | Price of the item in IDR |\n| additionalInfo.items.price.value | String (ISO4217) | M | Item Price value |\n| additionalInfo.items.price.currency | String(3) | M | Item Price currency |\n| additionalInfo.items.quantity | String(16) | M | Quantity of the item purchased by the customer. |\n| additionalInfo.items.name | String(64) | O | Name of the item. |\n| additionalInfo.items.merchantName | String(64) | O | Name of the merchant selling the item. |\n| additionalInfo.items.brand | String(64) | O | Brand name of the item. |\n| additionalInfo.items.category | String(64) | O | Category of the item. |\n| additionalInfo.items.url | String(64) | O | HTTP URL of the item in the merchant site |\n| additionalInfo.metadata | Object | O | Transaction metadata |"
+									},
+									"response": [
+										{
+											"id": "3269fc98-7659-492e-876a-a0fa9fe65a5a",
+											"name": "Guest Direct Debit Payment",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Authorization",
+														"value": "dummy"
+													},
+													{
+														"key": "X-TIMESTAMP",
+														"value": "dummy"
+													},
+													{
+														"key": "X-SIGNATURE",
+														"value": "dummy"
+													},
+													{
+														"key": "X-PARTNER-ID",
+														"value": "82150823919040624621823174737537"
+													},
+													{
+														"key": "X-EXTERNAL-ID",
+														"value": "{{$randomUUID}}"
+													},
+													{
+														"key": "X-DEVICE-ID",
+														"value": "09864ADCASA"
+													},
+													{
+														"key": "CHANNEL-ID",
+														"value": "95221"
+													},
+													{
+														"key": "debug-id",
+														"value": "{{$randomUUID}}-debug-cent"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"partnerReferenceNo\": \"vin-deeplink-test-01\",\n  \"chargeToken\": \"\",\n  \"merchantId\": \"G059876677\",\n  \"urlParam\": {\n    \"url\": \"https://www.google.com\",\n    \"type\": \"PAY_RETURN\",\n    \"isDeeplink\": \"Y\"\n  },\n  \"validUpTo\": \"2024-01-13T16:59:11+07:00\",\n  \"payOptionDetails\": [\n    {\n      \"payMethod\": \"GOPAY\",\n      \"payOption\": \"GOPAY_WALLET\",\n      \"transAmount\": {\n        \"value\": \"100.00\",\n        \"currency\": \"IDR\"\n      }\n    }\n  ],\n  \"additionalInfo\": {\n    \"customerDetails\": {\n      \"phone\": \"81234532422\",\n      \"firstName\": \"farz\",\n      \"lastName\": \"zsasa\",\n      \"email\": \"something@gmail.com\",\n      \"billingAddress\": {\n        \"firstName\": \"billingFirstName\",\n        \"lastName\": \"billingLastName\",\n        \"phone\": \"billingPhone\",\n        \"address\": \"billingAddress\",\n        \"city\": \"billingCity\",\n        \"postalCode\": \"12790\",\n        \"countryCode\": \"CZH\"\n      },\n      \"shippingAddress\": {\n        \"firstName\": \"shippingFirstName\",\n        \"lastName\": \"shippingLastName\",\n        \"phone\": \"shippingPhone\",\n        \"address\": \"shippingAddress\",\n        \"city\": \"shippingCity\",\n        \"postalCode\": \"12790\",\n        \"countryCode\": \"CZH\"\n      }\n    },\n    \"items\": [\n      {\n        \"id\": \"8za1ieleavwusxn6u5re60ri\",\n        \"price\":  {\n          \"value\": \"100.00\",\n          \"currency\": \"IDR\"\n        },\n        \"quantity\": \"1\",\n        \"name\": \"subscription\",\n        \"brand\": \"brand\",\n        \"category\": \"subscription\",\n        \"merchantName\": \"amazon prime\",\n        \"url\": \"itemUrl\"\n      }\n    ],\n    \"metadata\": {}\n  }\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "https://snap-merchants-staging.midtrans.com/v1.0/debit/payment-host-to-host"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "date",
+													"value": "Fri, 12 Jan 2024 09:42:18 GMT"
+												},
+												{
+													"key": "x-timestamp",
+													"value": "2024-01-12T09:42:18.048162Z"
+												},
+												{
+													"key": "content-type",
+													"value": "application/json;charset=utf-8"
+												},
+												{
+													"key": "access-control-allow-methods",
+													"value": "POST,GET"
+												},
+												{
+													"key": "access-control-allow-origin",
+													"value": "https://apidevportal.bi.go.id"
+												},
+												{
+													"key": "server",
+													"value": "istio-envoy"
+												},
+												{
+													"key": "x-envoy-upstream-service-time",
+													"value": "409"
+												},
+												{
+													"key": "transfer-encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n    \"responseCode\": \"2005400\",\n    \"responseMessage\": \"Successful\",\n    \"referenceNo\": \"A120240112094218xVIM0Z4sgDID\",\n    \"partnerReferenceNo\": \"vin-deeplink-test-01\",\n    \"webRedirectUrl\": \"https://d26rcus4i6hpc.cloudfront.net/app/merchanttransfer?tref=A120240112094218xVIM0Z4sgDID&amount=100&activity=GP:RR&callback_url=https%3A%2F%2Fwww.google.com\",\n    \"additionalInfo\": {\n        \"grossAmount\": {\n            \"value\": \"100.00\",\n            \"currency\": \"IDR\"\n        },\n        \"transactionTime\": \"2024-01-12T09:42:18.23466Z\",\n        \"paymentType\": \"GOPAY\",\n        \"validUpTo\": \"2024-01-13T09:59:11Z\"\n    }\n}"
+										}
+									]
+								}
+							],
+							"id": "e3a04459-78d8-4a55-b4ec-4386cfbbf772"
+						},
+						{
 							"name": "Query/Get Status",
 							"item": [
 								{
