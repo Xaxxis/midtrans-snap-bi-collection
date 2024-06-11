@@ -3224,6 +3224,209 @@
 									]
 								},
 								{
+									"name": "Create - Complete - BRI",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1009191c-ebec-4839-8ede-26f70b81bf04",
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "0e6b12d1-94c3-443b-b326-52c967e089fc",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);",
+													"pm.collectionVariables.set(\"BcaVaNo\", jsonData.virtualAccountData.virtualAccountNo);",
+													"pm.collectionVariables.set(\"BcaVaTrxId\", jsonData.virtualAccountData.trxId);",
+													"pm.collectionVariables.set(\"BcaVaCustNo\", jsonData.virtualAccountData.customerNo);",
+													"pm.collectionVariables.set(\"BcaVaPartnerServiceId\", jsonData.virtualAccountData.partnerServiceId);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "1e626b49-7aa9-4935-be7a-65e080d4f4ce",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-EXTERNAL-ID",
+												"value": "OPENAPI-BCA-VA-{{$timestamp}}"
+											},
+											{
+												"key": "X-PARTNER-ID",
+												"value": "dummy"
+											},
+											{
+												"key": "CHANNEL-ID",
+												"value": "95522"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"partnerServiceId\": \"  088899\",\n    \"customerNo\": \"12345678901234567890\",\n    \"virtualAccountNo\": \"  08889912345678901234567890\",\n    \"virtualAccountName\": \"Jokul Doe\",\n    \"virtualAccountEmail\": \"jokul@email.com\",\n    \"virtualAccountPhone\": \"6281828384858\",\n    \"trxId\": \"OPENAPI-BCA-VA-{{$timestamp}}\",\n    \"expiredDate\": \"2024-06-04T10:16:11+07:00\",\n    \"totalAmount\": {\n        \"value\": \"10000.00\",\n        \"currency\": \"IDR\"\n    },\n    \"additionalInfo\": {\n        \"subCompanyCode\": \"0000\",\n        \"merchantId\": \"{{MidtransMerchantId}}\",\n        \"bank\": \"bca\"\n    }\n}"
+										},
+										"url": "https://merchants.stg.midtrans.com/v1.0/transfer-va/create-va"
+									},
+									"response": [
+										{
+											"id": "82ff8d52-d538-4d72-bc6a-54bf91d93904",
+											"name": "Initial customer_no",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "X-EXTERNAL-ID",
+														"value": "cent-testing-0033"
+													},
+													{
+														"key": "X-PARTNER-ID",
+														"value": "dummy"
+													},
+													{
+														"key": "CHANNEL-ID",
+														"value": "95521"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"partnerServiceId\": \"     337\",\n    \"customerNo\": \"0858100016832\",\n    \"virtualAccountNo\": \"     3370858100016832\",\n    \"virtualAccountName\": \"Jokul Doe\",\n    \"virtualAccountEmail\": \"jokul@email.com\",\n    \"virtualAccountPhone\": \"6281828384858\",\n    \"trxId\": \"cent-testing-2321\",\n    \"totalAmount\": {\n        \"value\": \"10000.00\",\n        \"currency\": \"IDR\"\n    },\n    \"additionalInfo\": {\n        \"subCompanyCode\": \"22234\",\n        \"merchantId\": \"G258333785\",\n        \"bank\": \"permata\",\n        \"freeText\": {\n            \"inquiry\": [\n                {\n                    \"id\": \"Inquiry Free Text Testing ID\",\n                    \"en\": \"Inquiry Free Text Testing EN\"\n                }\n            ],\n            \"payment\": [\n                {\n                    \"id\": \"Payment Free Text Testing ID\",\n                    \"en\": \"Payment Free Text Testing EN\"\n                }\n            ]\n        },\n        \"customerDetails\": {\n            \"firstName\": \"Jokul\",\n            \"lastName\": \"Doe\",\n            \"email\": \"jokul@email.com\",\n            \"phone\": \"+6281828384858\",\n            \"billingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            },\n            \"shippingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            }\n        },\n        \"customField\": {\n            \"1\": \"custom-field-1\",\n            \"2\": \"custom-field-2\",\n            \"3\": \"custom-field-3\"\n        },\n        \"items\": [\n            {\n                \"id\": \"a1\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 3,\n                \"name\": \"Apel\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            },\n            {\n                \"id\": \"a2\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 7,\n                \"name\": \"Apel Malang\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            }\n        ]\n    }\n}"
+												},
+												"url": "{{host}}/v1.0/transfer-va/create-va"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "date",
+													"value": "Wed, 10 Jan 2024 04:14:16 GMT"
+												},
+												{
+													"key": "x-timestamp",
+													"value": "2024-01-10T04:14:16.242177Z"
+												},
+												{
+													"key": "content-type",
+													"value": "application/json;charset=utf-8"
+												},
+												{
+													"key": "access-control-allow-methods",
+													"value": ""
+												},
+												{
+													"key": "access-control-allow-origin",
+													"value": ""
+												},
+												{
+													"key": "server",
+													"value": "istio-envoy"
+												},
+												{
+													"key": "x-envoy-upstream-service-time",
+													"value": "297"
+												},
+												{
+													"key": "transfer-encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n    \"responseMessage\": \"Successful\",\n    \"virtualAccountData\": {\n        \"expiryDate\": \"2024-01-11T11:14:16+07:00\",\n        \"virtualAccountEmail\": \"jokul@email.com\",\n        \"totalAmount\": {\n            \"value\": \"10000.00\",\n            \"currency\": \"IDR\"\n        },\n        \"partnerServiceId\": \"     337\",\n        \"virtualAccountPhone\": \"6281828384858\",\n        \"additionalInfo\": {\n            \"subCompanyCode\": \"22234\",\n            \"merchantId\": \"G258333785\",\n            \"bank\": \"permata\",\n            \"freeText\": {\n                \"inquiry\": [\n                    {\n                        \"id\": \"Inquiry Free Text Testing ID\",\n                        \"en\": \"Inquiry Free Text Testing EN\"\n                    }\n                ],\n                \"payment\": [\n                    {\n                        \"id\": \"Payment Free Text Testing ID\",\n                        \"en\": \"Payment Free Text Testing EN\"\n                    }\n                ]\n            },\n            \"customerDetails\": {\n                \"firstName\": \"Jokul\",\n                \"lastName\": \"Doe\",\n                \"email\": \"jokul@email.com\",\n                \"phone\": \"+6281828384858\",\n                \"billingAddress\": {\n                    \"firstName\": \"Jukul\",\n                    \"lastName\": \"Doe\",\n                    \"address\": \"Kalibata\",\n                    \"city\": \"Jakarta\",\n                    \"postalCode\": \"12190\",\n                    \"phone\": \"+6281828384858\",\n                    \"countryCode\": \"IDN\"\n                },\n                \"shippingAddress\": {\n                    \"firstName\": \"Jukul\",\n                    \"lastName\": \"Doe\",\n                    \"address\": \"Kalibata\",\n                    \"city\": \"Jakarta\",\n                    \"postalCode\": \"12190\",\n                    \"phone\": \"+6281828384858\",\n                    \"countryCode\": \"IDN\"\n                }\n            },\n            \"customField\": {\n                \"1\": \"custom-field-1\",\n                \"2\": \"custom-field-2\",\n                \"3\": \"custom-field-3\"\n            },\n            \"items\": [\n                {\n                    \"id\": \"a1\",\n                    \"price\": {\n                        \"value\": \"1000.00\",\n                        \"currency\": \"IDR\"\n                    },\n                    \"quantity\": 3,\n                    \"name\": \"Apel\",\n                    \"brand\": \"Fuji Apple\",\n                    \"category\": \"Fruit\",\n                    \"merchantName\": \"Fruit-store\"\n                },\n                {\n                    \"id\": \"a2\",\n                    \"price\": {\n                        \"value\": \"1000.00\",\n                        \"currency\": \"IDR\"\n                    },\n                    \"quantity\": 7,\n                    \"name\": \"Apel Malang\",\n                    \"brand\": \"Fuji Apple\",\n                    \"category\": \"Fruit\",\n                    \"merchantName\": \"Fruit-store\"\n                }\n            ]\n        },\n        \"virtualAccountName\": \"Jokul Doe\",\n        \"trxId\": \"cent-testing-2321rZJG$CjS}g\",\n        \"customerNo\": \"1708581000168\",\n        \"virtualAccountNo\": \"     3371708581000168\"\n    },\n    \"responseCode\": \"2002700\"\n}"
+										},
+										{
+											"id": "f6770010-2a6d-49d4-82cf-156fa8515e3f",
+											"name": "Create - Complete - BCA",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "X-EXTERNAL-ID",
+														"value": "cent-testing-0033"
+													},
+													{
+														"key": "X-PARTNER-ID",
+														"value": "dummy"
+													},
+													{
+														"key": "CHANNEL-ID",
+														"value": "95521"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"partnerServiceId\": \"     337\",\n    \"customerNo\": \"0858100016832\",\n    \"virtualAccountNo\": \"     3370858100016832\",\n    \"virtualAccountName\": \"Jokul Doe\",\n    \"virtualAccountEmail\": \"jokul@email.com\",\n    \"virtualAccountPhone\": \"6281828384858\",\n    \"trxId\": \"cent-testing-2441\",\n    \"totalAmount\": {\n        \"value\": \"10000.00\",\n        \"currency\": \"IDR\"\n    },\n    \"additionalInfo\": {\n        \"subCompanyCode\": \"22234\",\n        \"merchantId\": \"G258333785\",\n        \"bank\": \"permata\",\n        \"freeText\": {\n            \"inquiry\": [\n                {\n                    \"id\": \"Inquiry Free Text Testing ID\",\n                    \"en\": \"Inquiry Free Text Testing EN\"\n                }\n            ],\n            \"payment\": [\n                {\n                    \"id\": \"Payment Free Text Testing ID\",\n                    \"en\": \"Payment Free Text Testing EN\"\n                }\n            ]\n        },\n        \"customerDetails\": {\n            \"firstName\": \"Jokul\",\n            \"lastName\": \"Doe\",\n            \"email\": \"jokul@email.com\",\n            \"phone\": \"+6281828384858\",\n            \"billingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            },\n            \"shippingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            }\n        },\n        \"customField\": {\n            \"1\": \"custom-field-1\",\n            \"2\": \"custom-field-2\",\n            \"3\": \"custom-field-3\"\n        },\n        \"items\": [\n            {\n                \"id\": \"a1\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 3,\n                \"name\": \"Apel\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            },\n            {\n                \"id\": \"a2\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 7,\n                \"name\": \"Apel Malang\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            }\n        ]\n    }\n}"
+												},
+												"url": "{{host}}/v1.0/transfer-va/create-va"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "date",
+													"value": "Wed, 10 Jan 2024 04:14:46 GMT"
+												},
+												{
+													"key": "x-timestamp",
+													"value": "2024-01-10T04:14:46.151940Z"
+												},
+												{
+													"key": "content-type",
+													"value": "application/json;charset=utf-8"
+												},
+												{
+													"key": "access-control-allow-methods",
+													"value": ""
+												},
+												{
+													"key": "access-control-allow-origin",
+													"value": ""
+												},
+												{
+													"key": "server",
+													"value": "istio-envoy"
+												},
+												{
+													"key": "x-envoy-upstream-service-time",
+													"value": "275"
+												},
+												{
+													"key": "transfer-encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n    \"responseMessage\": \"Successful\",\n    \"virtualAccountData\": {\n        \"expiryDate\": \"2024-01-11T11:14:46+07:00\",\n        \"virtualAccountEmail\": \"jokul@email.com\",\n        \"totalAmount\": {\n            \"value\": \"10000.00\",\n            \"currency\": \"IDR\"\n        },\n        \"partnerServiceId\": \"     337\",\n        \"virtualAccountPhone\": \"6281828384858\",\n        \"additionalInfo\": {\n            \"subCompanyCode\": \"22234\",\n            \"merchantId\": \"G258333785\",\n            \"bank\": \"permata\",\n            \"freeText\": {\n                \"inquiry\": [\n                    {\n                        \"id\": \"Inquiry Free Text Testing ID\",\n                        \"en\": \"Inquiry Free Text Testing EN\"\n                    }\n                ],\n                \"payment\": [\n                    {\n                        \"id\": \"Payment Free Text Testing ID\",\n                        \"en\": \"Payment Free Text Testing EN\"\n                    }\n                ]\n            },\n            \"customerDetails\": {\n                \"firstName\": \"Jokul\",\n                \"lastName\": \"Doe\",\n                \"email\": \"jokul@email.com\",\n                \"phone\": \"+6281828384858\",\n                \"billingAddress\": {\n                    \"firstName\": \"Jukul\",\n                    \"lastName\": \"Doe\",\n                    \"address\": \"Kalibata\",\n                    \"city\": \"Jakarta\",\n                    \"postalCode\": \"12190\",\n                    \"phone\": \"+6281828384858\",\n                    \"countryCode\": \"IDN\"\n                },\n                \"shippingAddress\": {\n                    \"firstName\": \"Jukul\",\n                    \"lastName\": \"Doe\",\n                    \"address\": \"Kalibata\",\n                    \"city\": \"Jakarta\",\n                    \"postalCode\": \"12190\",\n                    \"phone\": \"+6281828384858\",\n                    \"countryCode\": \"IDN\"\n                }\n            },\n            \"customField\": {\n                \"1\": \"custom-field-1\",\n                \"2\": \"custom-field-2\",\n                \"3\": \"custom-field-3\"\n            },\n            \"items\": [\n                {\n                    \"id\": \"a1\",\n                    \"price\": {\n                        \"value\": \"1000.00\",\n                        \"currency\": \"IDR\"\n                    },\n                    \"quantity\": 3,\n                    \"name\": \"Apel\",\n                    \"brand\": \"Fuji Apple\",\n                    \"category\": \"Fruit\",\n                    \"merchantName\": \"Fruit-store\"\n                },\n                {\n                    \"id\": \"a2\",\n                    \"price\": {\n                        \"value\": \"1000.00\",\n                        \"currency\": \"IDR\"\n                    },\n                    \"quantity\": 7,\n                    \"name\": \"Apel Malang\",\n                    \"brand\": \"Fuji Apple\",\n                    \"category\": \"Fruit\",\n                    \"merchantName\": \"Fruit-store\"\n                }\n            ]\n        },\n        \"virtualAccountName\": \"Jokul Doe\",\n        \"trxId\": \"cent-testing-2441l6;)[&oi7b\",\n        \"customerNo\": \"7908581000168\",\n        \"virtualAccountNo\": \"     3377908581000168\"\n    },\n    \"responseCode\": \"2002700\"\n}"
+										}
+									]
+								},
+								{
 									"name": "Status - Basic",
 									"event": [
 										{
