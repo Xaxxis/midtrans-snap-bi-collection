@@ -2743,7 +2743,8 @@
 												"exec": [
 													""
 												],
-												"type": "text/javascript"
+												"type": "text/javascript",
+												"packages": {}
 											}
 										}
 									],
@@ -2756,11 +2757,11 @@
 										"header": [
 											{
 												"key": "X-EXTERNAL-ID",
-												"value": "math-testing-{{$randomHexColor}}"
+												"value": "OPENAPI-MANDIRI-BILL-1718077521"
 											},
 											{
 												"key": "X-PARTNER-ID",
-												"value": "dummy"
+												"value": "{{MidtransMerchantId}}"
 											},
 											{
 												"key": "CHANNEL-ID",
@@ -2773,7 +2774,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"inquiryRequestId\": \"{{MandiriBillTrxId}}\",\n    \"virtualAccountNo\": \"{{MandiriBillNo}}\",\n    \"customerNo\": \"{{MandiriBillCustNo}}\",\n    \"partnerServiceId\": \"{{MandiriBillPartnerServiceId}}\",\n    \"additionalInfo\": {\n        \"merchantId\": \"{{MidtransMerchantId}}\"\n    }\n}"
+											"raw": "{\n    \"inquiryRequestId\": \"OPENAPI-MANDIRI-BILL-1718077521\",\n    \"virtualAccountNo\": \"    5818220464150460\",\n    \"customerNo\": \"220464150460\",\n    \"partnerServiceId\": \"    5818\",\n    \"additionalInfo\": {\n        \"merchantId\": \"{{MidtransMerchantId}}\"\n    }\n}"
 										},
 										"url": "https://merchants.stg.midtrans.com/v1.0/transfer-va/status"
 									},
