@@ -5579,7 +5579,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "e5e5df4c-1328-4394-a897-d07a5bd0776d",
+				"id": "792f1a3d-69be-44c8-9ee9-2583d5515ff2",
 				"type": "text/javascript",
 				"exec": [
 					"if (pm.request.url.toString() == 'https://joolfe.github.io/postman-util-lib/dist/bundle.js') {",
@@ -5590,7 +5590,7 @@
 					"    return;",
 					"}",
 					"",
-					"const IRIS_REQUEST = \"IRIS\"",
+					"const IRIS_REQUEST = \"iris\"",
 					"",
 					"eval(pm.collectionVariables.get('pmlib_code'))",
 					"const moment = require(\"moment\")",
@@ -5602,11 +5602,12 @@
 					"const dateNowGMT7 = moment().utcOffset(7).format()",
 					"const dateNowUtc = new Date();",
 					"",
-					"con",
+					"const privateKey = pm.request.name.toLocaleLowerCase().includes(IRIS_REQUEST) ? pm.environment.get(\"IrisMerchantPrivateKey\") : pm.environment.get('MerchantPrivateKey')",
 					"",
 					"// Fuction generate signature key for AccessToken Request",
 					"let signatureB2bKey = (()=> {",
-					"    let key = pmlib.rs.KEYUTIL.getKey(pm.environment.get('MerchantPrivateKey'))",
+					"    let key = pmlib.rs.KEYUTIL.getKey(privateKey",
+					")",
 					"",
 					"    let sign = new pmlib.rs.KJUR.crypto.Signature({\"alg\": \"SHA256withRSA\"})",
 					"",
@@ -5680,7 +5681,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "4c1c8f4a-04ef-4af1-8809-6dc3a2496eb2",
+				"id": "81bf5794-42a5-48d4-b58b-8d2c5c3e56d1",
 				"type": "text/javascript",
 				"exec": [
 					""
