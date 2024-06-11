@@ -5387,8 +5387,46 @@
 					},
 					"request": {
 						"method": "POST",
-						"header": [],
-						"url": "/v1.0/transfer-interbank"
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": ""
+							},
+							{
+								"key": "X-TIMESTAMP",
+								"value": ""
+							},
+							{
+								"key": "X-SIGNATURE",
+								"value": ""
+							},
+							{
+								"key": "X-PARTNER-ID",
+								"value": ""
+							},
+							{
+								"key": "X-EXTERNAL-ID",
+								"value": ""
+							},
+							{
+								"key": "CHANNEL-ID",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"partnerReferenceNo\": \"61945219227478976148442931867349\",\n   \"amount\": { \"value\": \"100000.00\", \"currency\": \"IDR” },\n   \"beneficiaryBankCode\": \"0020307\",\n   \"beneficiaryAccountNo\": \"1172993826\",\n   \"beneficiaryAccountName\": \"Jon Snow\",\n   \"beneficiaryEmail\": \"beneficiary@example.com\",\n   \"sourceAccountNo\": \"bnia750516c\",\n   \"transactionDate\": \"2021-12-07T23:02:03+07:00\",\n   \"additionalInfo\": {\n       \"remark\": \"Payout Sep 22\",\n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://app.sandbox.midtrans.com/iris/v1.0/transfer-interbank"
 					},
 					"response": []
 				}
