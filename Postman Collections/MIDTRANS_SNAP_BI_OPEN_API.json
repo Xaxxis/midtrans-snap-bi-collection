@@ -5579,10 +5579,14 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "73c20320-4c72-427a-848f-0f1ac95a1f81",
+				"id": "1a0415b5-ff14-4ae0-9ac8-55bbd34a934e",
 				"type": "text/javascript",
 				"exec": [
 					"if (pm.request.url.toString() == 'https://joolfe.github.io/postman-util-lib/dist/bundle.js') {",
+					"    return;",
+					"}",
+					"",
+					"if (pm.info.requestName.toLocaleLowerCase().includes(\"iris\")) {",
 					"    return;",
 					"}",
 					"",
@@ -5590,11 +5594,6 @@
 					"    return;",
 					"}",
 					"",
-					"if (pm.info.requestName.toLocaleLowerCase().includes(\"iris\")) {",
-					"    return",
-					"}",
-					"",
-					"const IRIS_REQUEST = \"iris\"",
 					"",
 					"eval(pm.collectionVariables.get('pmlib_code'))",
 					"const moment = require(\"moment\")",
@@ -5683,7 +5682,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6f0d7c2d-365e-4ab5-b715-6815859650e8",
+				"id": "475ea125-fc86-4920-a6ef-dd7be7469d40",
 				"type": "text/javascript",
 				"exec": [
 					""
