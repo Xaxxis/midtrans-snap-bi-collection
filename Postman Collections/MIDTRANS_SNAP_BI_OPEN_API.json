@@ -5426,7 +5426,7 @@
 								}
 							}
 						},
-						"url": "https://app.sandbox.midtrans.com/iris/v1.0/transfer-interbank"
+						"url": "https://merchants-sandbox.midtrans.com/v1.0/transfer-interbank"
 					},
 					"response": []
 				}
