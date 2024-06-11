@@ -5406,7 +5406,7 @@
 							},
 							{
 								"key": "X-PARTNER-ID",
-								"value": ""
+								"value": "{{IrisPartnerId}}"
 							},
 							{
 								"key": "X-EXTERNAL-ID",
@@ -5414,12 +5414,12 @@
 							},
 							{
 								"key": "CHANNEL-ID",
-								"value": ""
+								"value": "{{IrisChanneld}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"partnerReferenceNo\": \"61945219227478976148442931867349\",\n   \"amount\": { \"value\": \"100000.00\", \"currency\": \"IDR” },\n   \"beneficiaryBankCode\": \"0020307\",\n   \"beneficiaryAccountNo\": \"1172993826\",\n   \"beneficiaryAccountName\": \"Jon Snow\",\n   \"beneficiaryEmail\": \"beneficiary@example.com\",\n   \"sourceAccountNo\": \"bnia750516c\",\n   \"transactionDate\": \"2021-12-07T23:02:03+07:00\",\n   \"additionalInfo\": {\n       \"remark\": \"Payout Sep 22\",\n   }\n}",
+							"raw": "{\n    \"partnerReferenceNo\": \"61945219227478976148442931867349\",\n    \"amount\": {\n        \"value\": \"100000.00\",\n        \"currency\": \"IDR\"\n    },\n    \"beneficiaryBankCode\": \"0020307\",\n    \"beneficiaryAccountNo\": \"1172993826\",\n    \"beneficiaryAccountName\": \"Jon Snow\",\n    \"beneficiaryEmail\": \"beneficiary@example.com\",\n    \"sourceAccountNo\": \"bnia750516c\",\n    \"transactionDate\": \"2021-12-07T23:02:03+07:00\",\n    \"additionalInfo\": {\n        \"remark\": \"Payout Sep 22\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -5579,7 +5579,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "444bb273-b11f-457e-89ea-c10dc2a49a93",
+				"id": "e5e5df4c-1328-4394-a897-d07a5bd0776d",
 				"type": "text/javascript",
 				"exec": [
 					"if (pm.request.url.toString() == 'https://joolfe.github.io/postman-util-lib/dist/bundle.js') {",
@@ -5590,7 +5590,7 @@
 					"    return;",
 					"}",
 					"",
-					"const IRIS_REQUEST = pm.request.n",
+					"const IRIS_REQUEST = \"IRIS\"",
 					"",
 					"eval(pm.collectionVariables.get('pmlib_code'))",
 					"const moment = require(\"moment\")",
@@ -5601,6 +5601,8 @@
 					"const clientId = pm.environment.get('ClientId')",
 					"const dateNowGMT7 = moment().utcOffset(7).format()",
 					"const dateNowUtc = new Date();",
+					"",
+					"con",
 					"",
 					"// Fuction generate signature key for AccessToken Request",
 					"let signatureB2bKey = (()=> {",
@@ -5678,7 +5680,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "89d20a71-be49-48be-b62f-57adc08bc1cb",
+				"id": "4c1c8f4a-04ef-4af1-8809-6dc3a2496eb2",
 				"type": "text/javascript",
 				"exec": [
 					""
