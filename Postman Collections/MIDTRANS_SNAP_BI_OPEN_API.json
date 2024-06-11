@@ -2632,7 +2632,7 @@
 										"header": [
 											{
 												"key": "X-EXTERNAL-ID",
-												"value": "OPENAPI-MANDIRI-BILL-ZAKI-{{$timestamp}}"
+												"value": "OPENAPI-MANDIRI-BILL-{{$timestamp}}"
 											},
 											{
 												"key": "X-PARTNER-ID",
@@ -2649,7 +2649,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"partnerServiceId\": \"  088899\",\n    \"customerNo\": \"12345678901234567890\",\n    \"virtualAccountNo\": \"  08889912345678901234567890\",\n    \"virtualAccountName\": \"Jokul Doe\",\n    \"virtualAccountEmail\": \"jokul@email.com\",\n    \"virtualAccountPhone\": \"6281828384858\",\n    \"trxId\": \"OPENAPI-MANDIRI-BILL-ZAKI-{{$timestamp}}\",\n    \"totalAmount\": {\n        \"value\": \"10000.00\",\n        \"currency\": \"IDR\"\n    },\n    \"additionalInfo\": {\n        \"merchantId\": \"G059876677\",\n        \"bank\": \"mandiri\",\n        \"mandiri\": {\n            \"billInfo1\": \"bank_name\",\n            \"billInfo2\": \"mandiri\",\n            \"billInfo3\": \"Name:\",\n            \"billInfo4\": \"Budi Utomo\",\n            \"billInfo5\": \"Class:\",\n            \"billInfo6\": \"Computer Science\",\n            \"billInfo7\": \"ID:\",\n            \"billInfo8\": \"VT-12345\",\n            \"billKey\": \"085156162039\"\n        },\n        \"customerDetails\": {\n            \"firstName\": \"Jokul\",\n            \"lastName\": \"Doe\",\n            \"email\": \"jokul@email.com\",\n            \"phone\": \"+6281828384858\",\n            \"billingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            },\n            \"shippingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            }\n        },\n        \"customField\": {\n            \"1\": \"custom-field-1\",\n            \"2\": \"custom-field-2\",\n            \"3\": \"custom-field-3\"\n        },\n        \"items\": [\n            {\n                \"id\": \"a1\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 3,\n                \"name\": \"Apel\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            },\n            {\n                \"id\": \"a2\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 7,\n                \"name\": \"Apel Malang\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            }\n        ]\n    }\n}"
+											"raw": "{\n    \"partnerServiceId\": \"  088899\",\n    \"customerNo\": \"12345678901234567890\",\n    \"virtualAccountNo\": \"  08889912345678901234567890\",\n    \"virtualAccountName\": \"Jokul Doe\",\n    \"virtualAccountEmail\": \"jokul@email.com\",\n    \"virtualAccountPhone\": \"6281828384858\",\n    \"expiredDate\": \"2024-06-12T10:16:11+07:00\",\n    \"trxId\": \"OPENAPI-MANDIRI-BILL-{{$timestamp}}\",\n    \"totalAmount\": {\n        \"value\": \"10000.00\",\n        \"currency\": \"IDR\"\n    },\n    \"additionalInfo\": {\n        \"merchantId\": \"G059876677\",\n        \"bank\": \"mandiri\",\n        \"mandiri\": {\n            \"billInfo1\": \"bank_name\",\n            \"billInfo2\": \"mandiri\",\n            \"billInfo3\": \"Name:\",\n            \"billInfo4\": \"Budi Utomo\",\n            \"billInfo5\": \"Class:\",\n            \"billInfo6\": \"Computer Science\",\n            \"billInfo7\": \"ID:\",\n            \"billInfo8\": \"VT-12345\",\n            \"billKey\": \"085156162039\"\n        },\n        \"customerDetails\": {\n            \"firstName\": \"Jokul\",\n            \"lastName\": \"Doe\",\n            \"email\": \"jokul@email.com\",\n            \"phone\": \"+6281828384858\",\n            \"billingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            },\n            \"shippingAddress\": {\n                \"firstName\": \"Jukul\",\n                \"lastName\": \"Doe\",\n                \"address\": \"Kalibata\",\n                \"city\": \"Jakarta\",\n                \"postalCode\": \"12190\",\n                \"phone\": \"+6281828384858\",\n                \"countryCode\": \"IDN\"\n            }\n        },\n        \"customField\": {\n            \"1\": \"custom-field-1\",\n            \"2\": \"custom-field-2\",\n            \"3\": \"custom-field-3\"\n        },\n        \"items\": [\n            {\n                \"id\": \"a1\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 3,\n                \"name\": \"Apel\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            },\n            {\n                \"id\": \"a2\",\n                \"price\": {\n                    \"value\": \"1000.00\",\n                    \"currency\": \"IDR\"\n                },\n                \"quantity\": 7,\n                \"name\": \"Apel Malang\",\n                \"brand\": \"Fuji Apple\",\n                \"category\": \"Fruit\",\n                \"merchantName\": \"Fruit-store\"\n            }\n        ]\n    }\n}"
 										},
 										"url": "https://merchants.stg.midtrans.com/v1.0/transfer-va/create-va"
 									},
@@ -5971,6 +5971,22 @@
 		},
 		{
 			"key": "BcaVaPartnerServiceId",
+			"value": ""
+		},
+		{
+			"key": "MandiriBillNo",
+			"value": ""
+		},
+		{
+			"key": "MandiriBillTrxId",
+			"value": ""
+		},
+		{
+			"key": "MandiriBillCustNo",
+			"value": ""
+		},
+		{
+			"key": "MandiriBillPartnerServiceId",
 			"value": ""
 		}
 	]
