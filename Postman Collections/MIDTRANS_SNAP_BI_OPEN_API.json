@@ -5378,7 +5378,21 @@
 		},
 		{
 			"name": "IRIS Disbursement OpenAPI",
-			"item": [],
+			"item": [
+				{
+					"name": "IRIS - Transfer Interbank",
+					"id": "01445435-4712-478d-844e-251a8957a582",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "/v1.0/transfer-interbank"
+					},
+					"response": []
+				}
+			],
 			"id": "94e08092-6988-4402-b824-26221300a979"
 		},
 		{
