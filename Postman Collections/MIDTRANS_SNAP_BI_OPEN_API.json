@@ -5579,7 +5579,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "792f1a3d-69be-44c8-9ee9-2583d5515ff2",
+				"id": "73c20320-4c72-427a-848f-0f1ac95a1f81",
 				"type": "text/javascript",
 				"exec": [
 					"if (pm.request.url.toString() == 'https://joolfe.github.io/postman-util-lib/dist/bundle.js') {",
@@ -5588,6 +5588,10 @@
 					"",
 					"if (pm.info.requestName.toLocaleLowerCase().includes(\"legacy\") || pm.info.requestName === \"Sample Request Access Token B2B\") {",
 					"    return;",
+					"}",
+					"",
+					"if (pm.info.requestName.toLocaleLowerCase().includes(\"iris\")) {",
+					"    return",
 					"}",
 					"",
 					"const IRIS_REQUEST = \"iris\"",
@@ -5602,12 +5606,10 @@
 					"const dateNowGMT7 = moment().utcOffset(7).format()",
 					"const dateNowUtc = new Date();",
 					"",
-					"const privateKey = pm.request.name.toLocaleLowerCase().includes(IRIS_REQUEST) ? pm.environment.get(\"IrisMerchantPrivateKey\") : pm.environment.get('MerchantPrivateKey')",
 					"",
 					"// Fuction generate signature key for AccessToken Request",
 					"let signatureB2bKey = (()=> {",
-					"    let key = pmlib.rs.KEYUTIL.getKey(privateKey",
-					")",
+					"    let key = pmlib.rs.KEYUTIL.getKey(pm.environment.get('MerchantPrivateKey'))",
 					"",
 					"    let sign = new pmlib.rs.KJUR.crypto.Signature({\"alg\": \"SHA256withRSA\"})",
 					"",
@@ -5681,7 +5683,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "81bf5794-42a5-48d4-b58b-8d2c5c3e56d1",
+				"id": "6f0d7c2d-365e-4ab5-b715-6815859650e8",
 				"type": "text/javascript",
 				"exec": [
 					""
